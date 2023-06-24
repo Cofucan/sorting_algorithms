@@ -11,18 +11,18 @@ betty-all:
 clean:
 	rm bubble insertion select quick
 
-bubble:
+bubble_sort:
 	gcc $(CFLAGS) 0-main.c $(FUTILS) $(F0) -o bubble -g
 	./bubble
 
-insert:
+insertion_sort:
 	gcc $(CFLAGS) 1-main.c $(FUTILS) $(F1) -o insertion -g
 	./insertion
 
-select:
+select_sort:
 	gcc $(CFLAGS) 2-main.c $(FUTILS) $(F2) -o select -g
 	./select
 
-quick:
+quick_sort:
 	gcc $(CFLAGS) 3-main.c $(FUTILS) $(F3) -o quick -g
 	./quick
