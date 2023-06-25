@@ -19,4 +19,12 @@ void insertion_sort_list(listint_t **list)
     bar = head->next;
 
     if (foo->n > bar->n)
+    {
+        bar->prev->next = bar->next;
+        bar->next->prev = bar->prev;
+        bar->prev = foo->prev;
+        bar->next = foo;
+        foo->prev->next = bar;
+        foo->prev = bar;
+    }
 }
