@@ -15,6 +15,9 @@ void selection_sort(int *array, size_t size)
 	size_t sort_position, min_position, cursor;
 	int hold;
 
+	if (!array || size < 2)
+		return;
+
 	sort_position = 0;
 
 	while (sort_position < size - 1)
