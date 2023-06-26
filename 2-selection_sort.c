@@ -13,7 +13,7 @@
 void selection_sort(int *array, size_t size)
 {
 	size_t sort_position, min_position, cursor;
-	int hold;
+	int min_number, hold;
 
 	sort_position = 0;
 	min_position = 1;
@@ -21,11 +21,17 @@ void selection_sort(int *array, size_t size)
 	while (sort_position < size - 1)
 	{
 		cursor = sort_position;
+		cursor++;
+		min_number = array[cursor];
+
 		while (cursor < size)
 		{
-			cursor++;
-			if (array[cursor] < array[sort_position])
+			if (array[cursor] < min_number)
+			{
 				min_position = cursor;
+				min_number = array[cursor];
+			}
+			cursor++;
 		}
 
 		if (array[min_position] < array[sort_position])
