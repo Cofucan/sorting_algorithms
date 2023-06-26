@@ -1,49 +1,46 @@
 #include "sort.h"
 
 /**
- * bubble_sort - Sorting Algorithm
- * @array: The array to be sorted.
- * @size: The size of the array to be sorted.
+ * insertion_sort_list - Sorting Algorithm
+ * @list: The doubly-linked list to be sorted.
  *
- * The bubble-sort algorithm for sorting an array of integers.
+ * This is an insertion-sort algorithm for sorting a list of integers.
  *
  * Return: Nothing.
  */
 
 void insertion_sort_list(listint_t **list)
 {
-    listint_t *head, *foo, *bar, *unsorted;
+	listint_t *to_be_sorted, *unsorted;
 
-    head = *list;
-    unsorted = head;
+	if (!list || !(*list) || !(*list)->next)
+		return;
 
-    while (unsorted->next)
-    {
-        unsorted = unsorted->next;
-        foo = unsorted->prev;
+	unsorted = (*list)->next;
 
-        while (foo)
-        {
-            if ((foo->n > unsorted->n) && (foo->prev == NULL || foo->prev->n <= unsorted->n))
-                break;
-            foo = foo->prev;
-        }
+	while (unsorted)
+	{
+		to_be_sorted = unsorted;
+		unsorted = unsorted->next;
 
-        if (foo)
-        {
-            bar = unsorted;
-            unsorted = unsorted->prev;
-            bar->prev->next = bar->next;
-            if (bar->next)
-                bar->next->prev = bar->prev;
-            bar->prev = foo->prev;
-            bar->next = foo;
-            if (foo->prev)
-                foo->prev->next = bar;
-            else
-                head = bar;
-            foo->prev = bar;
-            print_list(head);
-        }
-    }
+		while (to_be_sorted->prev && (to_be_sorted->prev->n > to_be_sorted->n))
+		{
+			/* Join the previous node with the next node */
+			to_be_sorted->prev->next = to_be_sorted->next;
+			if (to_be_sorted->next)
+				to_be_sorted->next->prev = to_be_sorted->prev;
+
+			to_be_sorted->next = to_be_sorted->prev;
+			to_be_sorted->prev = to_be_sorted->prev->prev;
+
+			to_be_sorted->next->prev = to_be_sorted;
+
+			if (to_be_sorted->prev)
+				to_be_sorted->prev->next = to_be_sorted;
+			else
+				*list = to_be_sorted;
+
+			print_list(*list);
+		}
+	}
 }
