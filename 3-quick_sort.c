@@ -32,14 +32,14 @@ void quick_sort(int *array, size_t size)
 				hold = array[cursor_idx];
 				array[cursor_idx] = array[swap_idx];
 				array[swap_idx] = hold;
+				print_array(array, size);
 			}
 		}
 		cursor_idx++;
 	}
-	print_array(array, size);
 
 	left_size = swap_idx;
-	right_size = size - swap_idx;
+	right_size = size - swap_idx - 1;
 
 	quick_sort(array, left_size);
 	quick_sort(array + swap_idx + 1, right_size);
