@@ -1,5 +1,7 @@
 #include "sort.h"
 
+void quick_sort_recursion(int *array, size_t size, int *o_array, size_t o_size);
+
 /**
  * selection_sort - Sorting Algorithm
  * @array: The array to be sorted.
@@ -11,6 +13,11 @@
  */
 
 void quick_sort(int *array, size_t size)
+{
+	quick_sort_recursion(array, size, array, size);
+}
+
+void quick_sort_recursion(int *array, size_t size, int *o_array, size_t o_size)
 {
 	size_t cursor_idx, pivot_idx, swap_idx;
 	int hold, left_size, right_size;
@@ -32,7 +39,7 @@ void quick_sort(int *array, size_t size)
 				hold = array[cursor_idx];
 				array[cursor_idx] = array[swap_idx];
 				array[swap_idx] = hold;
-				print_array(array, size);
+				print_array(o_array, o_size);
 			}
 		}
 		cursor_idx++;
@@ -41,6 +48,6 @@ void quick_sort(int *array, size_t size)
 	left_size = swap_idx;
 	right_size = size - swap_idx - 1;
 
-	quick_sort(array, left_size);
-	quick_sort(array + swap_idx + 1, right_size);
+	quick_sort_recursion(array, left_size, o_array, o_size);
+	quick_sort_recursion(array + swap_idx + 1, right_size, o_array, o_size);
 }
